@@ -1,2 +1,318 @@
 
-''' + html + '''
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROSALIA | روزاليا</title>
+<meta name="description" content="روزاليا للأزياء النسائية - أناقتك تبدأ من هنا">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --cream:#f8f3ec;
+  --pink:#c78d91;
+  --dark:#342b2b;
+  --muted:#897b78;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--cream);color:var(--dark);
+ font-family:'Cairo',sans-serif;
+}
+button,input{font-family:inherit}
+button{cursor:pointer}
+.topbar{
+ background:#493737;color:white;text-align:center;
+ padding:9px;font-size:12px;
+}
+header{
+ background:#fffaf5;padding:17px 5%;
+ display:flex;align-items:center;justify-content:space-between;
+ position:sticky;top:0;z-index:10;
+ box-shadow:0 2px 12px #00000008;
+}
+.logo{font-size:29px;font-weight:800;letter-spacing:3px;color:#a96e76}
+.logo small{display:block;text-align:center;font-size:10px;letter-spacing:5px}
+nav{display:flex;gap:22px}
+nav a{text-decoration:none;color:var(--dark);font-size:13px}
+.cart-btn{
+ border:1px solid #e7d9d4;background:transparent;
+ padding:9px 15px;border-radius:25px;color:var(--dark);
+}
+.hero{
+ margin:22px auto;width:92%;min-height:370px;
+ border-radius:7px;background:linear-gradient(110deg,#e9d9d1,#f5e9e0,#dfc5c0);
+ display:flex;align-items:center;justify-content:center;text-align:center;
+ padding:35px 15px;
+}
+.hero-content{max-width:540px}
+.hero p{color:#765d5c;font-size:14px}
+.hero h1{font-size:clamp(36px,7vw,65px);margin:12px 0;color:#543d3c}
+.hero .sub{font-size:17px}
+.primary{
+ background:#a96e76;color:white;border:0;border-radius:3px;
+ padding:13px 29px;font-size:14px;margin-top:15px;
+}
+.section{padding:35px 5%;max-width:1250px;margin:auto}
+.section-head{text-align:center;margin-bottom:25px}
+.section-head h2{font-size:25px;margin:0 0 7px}
+.section-head p{font-size:13px;color:var(--muted)}
+.categories{
+ display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:27px
+}
+.category{
+ border:1px solid #dfceca;background:transparent;color:#594747;
+ padding:8px 19px;border-radius:30px;font-size:12px
+}
+.category.active,.category:hover{background:#a96e76;color:white;border-color:#a96e76}
+.products{
+ display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px
+}
+.product{background:white;padding:9px;border-radius:5px}
+.product-image{
+ height:220px;display:flex;align-items:center;justify-content:center;
+ text-align:center;background:linear-gradient(145deg,#eee1d9,#d8c1b8);
+ color:#856e69;font-size:14px;position:relative;overflow:hidden
+}
+.product-image span{font-size:44px;display:block;margin-bottom:8px}
+.product-info{padding:12px 5px}
+.product-info h3{font-size:14px;margin:0 0 5px}
+.price{color:#a96e76;font-weight:700;font-size:15px}
+.old-price{text-decoration:line-through;color:#aaa;font-size:12px;margin-right:6px}
+.product-info p{font-size:11px;color:var(--muted)}
+.product-info select{
+ width:100%;padding:9px;margin:5px 0;border:1px solid #e6d9d3;
+ background:#fff;border-radius:3px;color:#493b39
+}
+.add{
+ width:100%;padding:10px;border:0;background:#493737;color:white;
+ margin-top:7px;border-radius:3px
+}
+.add:hover{background:#a96e76}
+.about{
+ background:#eee2da;padding:45px 20px;text-align:center;margin-top:30px
+}
+.about h2{font-size:25px}
+.about p{max-width:600px;margin:auto;color:#75635f;line-height:2;font-size:14px}
+footer{background:#493737;color:#fff;padding:35px 6%;text-align:center}
+footer .logo{color:#f1c9ca}
+footer p{font-size:12px;color:#e1d1ce}
+.whatsapp{
+ position:fixed;bottom:20px;left:18px;background:#218b56;
+ color:white;text-decoration:none;padding:12px 18px;border-radius:40px;
+ box-shadow:0 4px 14px #0002;z-index:20;font-size:13px
+}
+#cart{
+ display:none;position:fixed;inset:0;background:#0007;z-index:30;
+ align-items:center;justify-content:center;padding:15px
+}
+.cart-box{
+ background:white;width:100%;max-width:450px;max-height:85vh;
+ overflow:auto;padding:23px;border-radius:8px
+}
+.cart-head{display:flex;justify-content:space-between;align-items:center}
+.close{border:0;background:none;font-size:25px}
+.cart-item{border-bottom:1px solid #eee;padding:12px 0;font-size:13px}
+.cart-item button{border:0;color:#a44;background:none}
+.total{font-weight:800;margin:20px 0}
+.checkout{width:100%;padding:13px;background:#218b56;color:white;border:0;border-radius:4px}
+.empty{text-align:center;color:#888;padding:25px}
+@media(max-width:800px){
+ .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .product-image{height:185px}
+ nav{gap:9px}
+ nav a{font-size:11px}
+}
+@media(max-width:430px){
+ header{padding:12px 3%}
+ .logo{font-size:23px}
+ .hero{min-height:310px}
+ .product-image{height:155px}
+ .section{padding:28px 3%}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">أهلاً بكم في ROSALIA | التوصيل لجميع محافظات العراق</div>
+
+<header>
+ <div class="logo">ROSALIA<small>WOMEN FASHION</small></div>
+ <nav>
+  <a href="#">الرئيسية</a>
+  <a href="#products">تسوقي الآن</a>
+  <a href="#about">من نحن</a>
+ </nav>
+ <button class="cart-btn" onclick="openCart()">السلة 🛍 <b id="count">0</b></button>
+</header>
+
+<section class="hero">
+ <div class="hero-content">
+  <p>YOUR STYLE · YOUR BEAUTY</p>
+  <h1>ROSALIA</h1>
+  <p class="sub">أناقتكِ تبدأ من اختياركِ</p>
+  <p>اكتشفي أحدث الأزياء النسائية واختاري إطلالتكِ المميزة</p>
+  <a href="#products"><button class="primary">تسوقي الآن</button></a>
+ </div>
+</section>
+
+<section class="section" id="products">
+ <div class="section-head">
+  <h2>تسوقي مجموعتنا</h2>
+  <p>اختاري القطعة التي تشبه أناقتكِ</p>
+ </div>
+ <div class="categories">
+  <button class="category active" onclick="filter('الكل',this)">الكل</button>
+  <button class="category" onclick="filter('ملابس',this)">ملابس</button>
+  <button class="category" onclick="filter('لانجري',this)">لانجري</button>
+  <button class="category" onclick="filter('بيجامات',this)">بيجامات</button>
+  <button class="category" onclick="filter('أخرى',this)">أخرى</button>
+ </div>
+ <div class="products" id="productList"></div>
+</section>
+
+<section class="about" id="about">
+ <h2>قصة أناقتكِ مع ROSALIA</h2>
+ <p>
+ روزاليا وجهتكِ للأزياء النسائية المختارة بعناية.
+ نؤمن أن الأناقة تبدأ من التفاصيل، وأن كل امرأة تستحق أن تشعر بجمالها وثقتها.
+ تسوقي بسهولة واستمتعي بخدمة التوصيل لجميع محافظات العراق.
+ </p>
+</section>
+
+<footer>
+ <div class="logo">ROSALIA</div>
+ <p>WOMEN FASHION</p>
+ <p>أناقتكِ عنواننا ❤️</p>
+ <p>التوصيل لجميع محافظات العراق</p>
+ <p>© ROSALIA 2026</p>
+</footer>
+
+<a class="whatsapp" href="#" onclick="contactWhatsApp(event)">واتساب 💬</a>
+
+<div id="cart" onclick="if(event.target===this)closeCart()">
+ <div class="cart-box">
+  <div class="cart-head">
+   <h3>سلة مشترياتكِ 🛍</h3>
+   <button class="close" onclick="closeCart()">×</button>
+  </div>
+  <div id="cartItems"></div>
+  <div class="total" id="total">المجموع: 0 د.ع</div>
+  <button class="checkout" onclick="checkout()">إتمام الطلب عبر واتساب</button>
+ </div>
+</div>
+
+<script>
+const WHATSAPP_NUMBER = "9647XXXXXXXXX";
+
+const products = [
+ {id:1,name:"قطعة أنيقة",price:25000,category:"ملابس",sizes:["S","M","L","XL"],colors:["بيج","وردي"],emoji:"👗"},
+ {id:2,name:"طقم نسائي",price:30000,category:"ملابس",sizes:["S","M","L","XL"],colors:["أسود","بيج"],emoji:"👚"},
+ {id:3,name:"لانجري نسائي",price:20000,category:"لانجري",sizes:["M","L","XL"],colors:["وردي","أسود"],emoji:"🎀"},
+ {id:4,name:"بيجامة نسائية",price:28000,category:"بيجامات",sizes:["M","L","XL"],colors:["وردي","أزرق"],emoji:"🌸"},
+ {id:5,name:"إطلالة ناعمة",price:35000,category:"ملابس",sizes:["S","M","L"],colors:["بيج","أبيض"],emoji:"✨"},
+ {id:6,name:"طقم منزلي",price:24000,category:"بيجامات",sizes:["M","L","XL"],colors:["وردي","رمادي"],emoji:"🌷"},
+ {id:7,name:"قطعة مميزة",price:27000,category:"أخرى",sizes:["S","M","L","XL"],colors:["أسود","بيج"],emoji:"💗"},
+ {id:8,name:"طقم أنثوي",price:32000,category:"لانجري",sizes:["M","L","XL"],colors:["أحمر","أسود"],emoji:"🌹"}
+];
+
+let cart = [];
+
+function money(n){
+ return n.toLocaleString("en-US")+" د.ع";
+}
+
+function render(items=products){
+ document.getElementById("productList").innerHTML=items.map(p=>`
+ <article class="product">
+  <div class="product-image"><div><span>${p.emoji}</span>صورة المنتج<br><small>ROSALIA</small></div></div>
+  <div class="product-info">
+   <h3>${p.name}</h3>
+   <div class="price">${money(p.price)}</div>
+   <p>اختاري اللون والمقاس</p>
+   <select id="color-${p.id}">
+    ${p.colors.map(c=>`<option>${c}</option>`).join("")}
+   </select>
+   <select id="size-${p.id}">
+    ${p.sizes.map(s=>`<option>${s}</option>`).join("")}
+   </select>
+   <button class="add" onclick="addToCart(${p.id})">أضيفي إلى السلة</button>
+  </div>
+ </article>`).join("");
+}
+
+function filter(category,btn){
+ document.querySelectorAll(".category").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");
+ render(category==="الكل"?products:products.filter(p=>p.category===category));
+}
+
+function addToCart(id){
+ const p=products.find(x=>x.id===id);
+ const color=document.getElementById("color-"+id).value;
+ const size=document.getElementById("size-"+id).value;
+ cart.push({...p,color,size});
+ document.getElementById("count").textContent=cart.length;
+ alert("تمت إضافة القطعة إلى سلتكِ ❤️");
+}
+
+function openCart(){
+ document.getElementById("cart").style.display="flex";
+ drawCart();
+}
+function closeCart(){
+ document.getElementById("cart").style.display="none";
+}
+function drawCart(){
+ const area=document.getElementById("cartItems");
+ if(!cart.length){
+  area.innerHTML='<div class="empty">سلتكِ فارغة حالياً 🌸</div>';
+ }else{
+  area.innerHTML=cart.map((p,i)=>`
+   <div class="cart-item">
+    <b>${p.name}</b><br>
+    اللون: ${p.color} | المقاس: ${p.size}<br>
+    ${money(p.price)}
+    <button onclick="removeItem(${i})">حذف</button>
+   </div>`).join("");
+ }
+ const sum=cart.reduce((a,p)=>a+p.price,0);
+ document.getElementById("total").textContent="المجموع: "+money(sum);
+}
+function removeItem(i){
+ cart.splice(i,1);
+ document.getElementById("count").textContent=cart.length;
+ drawCart();
+}
+function orderMessage(){
+ if(!cart.length)return "";
+ let msg="مرحباً ROSALIA، أريد طلب المنتجات التالية:%0A";
+ cart.forEach((p,i)=>{
+  msg+=`${i+1}- ${p.name} | اللون: ${p.color} | القياس: ${p.size} | ${p.price} دينار%0A`;
+ });
+ msg+="%0Aالمجموع: "+cart.reduce((a,p)=>a+p.price,0)+" دينار";
+ msg+="%0Aالاسم:%0Aالمحافظة والعنوان:%0Aرقم الهاتف:";
+ return msg;
+}
+function checkout(){
+ if(!cart.length){alert("السلة فارغة");return;}
+ if(WHATSAPP_NUMBER.includes("X")){
+  alert("يجب إضافة رقم واتساب روزاليا أولاً.");
+  return;
+ }
+ window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+orderMessage(),"_blank");
+}
+function contactWhatsApp(e){
+ e.preventDefault();
+ if(WHATSAPP_NUMBER.includes("X")){
+  alert("سنضيف رقم واتساب روزاليا عند تجهيز بيانات المتجر.");
+  return;
+ }
+ window.open("https://wa.me/"+WHATSAPP_NUMBER,"_blank");
+}
+render();
+</script>
+</body>
+</html>
